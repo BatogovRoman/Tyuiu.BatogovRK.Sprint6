@@ -12,7 +12,7 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24.Lib
                 {
                     if (array[i] == 0)
                     {
-                        res[x] = i;
+                        res[x] = array[i];
                         x++;
                     }
                 }
