@@ -9,6 +9,7 @@ namespace Tyuiu.BatogovRK.Sprint6.Task6.V8.Lib
             string str = "";
             string z = "z";
             string res = "";
+
             foreach (string line in a)
             {
                 str = str + " " + line;
