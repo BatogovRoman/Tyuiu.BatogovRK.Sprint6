@@ -5,31 +5,19 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24.Lib
     {
         public double[] LoadFromDataFile(string path)
         {
-            if (!File.Exists(path))
-                throw new FileNotFoundException($"Файл не найден: {path}");
-
-            string[] lines = File.ReadAllLines(path);
-            List<double> numbers = new List<double>();
-
-            foreach (string line in lines)
             {
-                if (!string.IsNullOrWhiteSpace(line))
+                double[] array = Array.ConvertAll(File.ReadAllLines(path), x => Convert.ToDouble(x));
+                double[] res = new double[array.Count(x => x == 0)];
+                for (int i = 0, x = 0; i < array.Length; i++)
                 {
-                    if (double.TryParse(line.Replace(',', '.'),
-                        System.Globalization.NumberStyles.Any,
-                        System.Globalization.CultureInfo.InvariantCulture,
-                        out double num))
+                    if (array[i] == 0)
                     {
-                        // если число очень маленькое, приводим к 0
-                        if (Math.Abs(num) < 1e-10)
-                            num = 0.0;
-
-                        numbers.Add(num);
+                        res[x] = i;
+                        x++;
                     }
                 }
+                return res;
             }
-
-            return numbers.ToArray();
         }
     }
 }

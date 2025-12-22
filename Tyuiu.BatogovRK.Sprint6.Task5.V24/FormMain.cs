@@ -18,46 +18,40 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24
         {
             try
             {
-                // ? Укажем точный путь к файлу
-                string path = $@"C:\Users\{Environment.UserName}\source\repos\Tyuiu.BatogovRK.Sprint6\files\InPutFileTask5V24.txt";
+
+                string path = $@"C:\Users\{Environment.UserName}\source\repos\ТИУ с 1 спринта\Tyuiu.BatogovRK.Sprint6\files\InPutFileTask5V24.txt";
 
 
-                // Загружаем данные
+
                 double[] allNumbers = ds.LoadFromDataFile(path);
 
-                // Очищаем таблицы
+
                 dataGridViewAll.Rows.Clear();
                 dataGridViewZeros.Rows.Clear();
 
-                // Если файл пустой
                 if (allNumbers.Length == 0)
                 {
                     MessageBox.Show("Файл пустой.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                // Добавляем все значения в первую таблицу
                 foreach (double val in allNumbers)
                 {
                     dataGridViewAll.Rows.Add(Math.Round(val, 3));
                 }
 
-                // Ищем нулевые значения
                 zeros = allNumbers.Where(val => Math.Abs(val) < 1e-10).ToArray();
 
-                // Добавляем только нулевые значения во вторую таблицу
                 foreach (double val in zeros)
                 {
                     dataGridViewZeros.Rows.Add(Math.Round(val, 3));
                 }
 
-                // Если нет нулевых значений, показываем сообщение
                 if (zeros.Length == 0)
                 {
                     MessageBox.Show("В файле нет чисел равных 0.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // Обновляем график
                 pictureBoxChart.Refresh();
             }
             catch (Exception ex)
@@ -74,7 +68,6 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24
 
             if (zeros.Length == 0)
             {
-                // Если нет нулевых значений, показываем сообщение
                 g.DrawString("Нет нулевых элементов для отображения",
                             new Font("Arial", 12, FontStyle.Bold),
                             Brushes.Red, x, y);
@@ -84,16 +77,15 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24
             int barHeight = 20;
             int maxWidth = pictureBoxChart.Width - 100;
 
-            // Рисуем диаграмму для нулевых значений
             g.DrawString($"Количество нулевых элементов: {zeros.Length}",
                         new Font("Arial", 10, FontStyle.Bold),
                         Brushes.Black, x, y);
             y += 30;
 
-            // Рисуем столбцы для каждого нулевого элемента
+
             for (int i = 0; i < zeros.Length; i++)
             {
-                int barWidth = 50; // фиксированная ширина для нулей
+                int barWidth = 50; 
                 g.FillRectangle(Brushes.LightBlue, x, y, barWidth, barHeight);
                 g.DrawRectangle(Pens.Black, x, y, barWidth, barHeight);
                 g.DrawString($"0 (элемент {i + 1})", this.Font, Brushes.Black, x + barWidth + 5, y);
