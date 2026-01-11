@@ -28,7 +28,6 @@ namespace Tyuiu.BatogovRK.Sprint6.Task5.V24.Test
             Assert.AreEqual(0, result[7]);
             Assert.AreEqual(2.3, result[8]);
 
-
             File.Delete(path);
         }
     }
