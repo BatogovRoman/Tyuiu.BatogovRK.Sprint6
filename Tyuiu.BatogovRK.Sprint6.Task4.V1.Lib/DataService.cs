@@ -25,6 +25,7 @@ namespace Tyuiu.BatogovRK.Sprint6.Task4.V1.Lib
                     count++;
                 }
             }
+
             return vArray;
         }
     }
